@@ -1,7 +1,7 @@
 import {
   shallowMount
 } from '@vue/test-utils'
-import List from '@/components/List.vue'
+import List from '@/views/List.vue'
 import {
   createRenderer
 } from 'vue-server-renderer'

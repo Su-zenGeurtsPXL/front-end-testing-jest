@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Message from '@/components/Message'
+import Message from '@/views/Message'
 
 describe('Message', () => {
   it('renders props.msg when passed', () => {

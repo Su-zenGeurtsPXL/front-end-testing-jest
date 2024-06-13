@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'HomeView',
   data: () => ({
@@ -39,3 +38,31 @@ export default {
   }
 }
 </script>
+
+<style>
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+button {
+  background-color: #c1ffc3;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 0;
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #a9e7ab;
+}
+
+</style>

@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import MessageToggle from '@/components/MessageToggle.vue'
-import Message from '@/components/Message'
+import MessageToggle from '@/views/MessageToggle.vue'
+import Message from '@/views/Message'
 
 describe('MessageToggle.vue', () => {
   it('toggles msg passed to Message when button is clicked', () => {
