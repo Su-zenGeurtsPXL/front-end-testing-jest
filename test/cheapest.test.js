@@ -34,8 +34,10 @@ describe('getCheapest()', () => {
 
   // Test the getCheapest function with a spy
   it('should get the cheapest basket item with a spy', () => {
-    // Check the name of the spy
+    // Create a spy on the getCheapest function
     const spy = jest.spyOn(basket, 'getCheapest')
+
+    // Check the name of the spy
     spy.mockImplementation(() => 'newName')
     spy.getMockImplementation().mockName = 'newName'
     basket.getCheapest()
@@ -61,6 +63,8 @@ describe('getCheapest()', () => {
   it('should get with a mock', () => {
     // Mock the getCheapest function
     const mock = jest.fn().mockImplementation(getCheapest)
+
+    // Check the return value of the spy
     expect(mock()).toEqual(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(1)
 
