@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
+
+// Define a function that returns the cheapest item in the basket
 function getCheapest () {
   const index = basket.items.reduce(
     (lowestIndex, currentItem, currentIndex) => {
-      console.log('currentItem: ', currentItem.price)
       if (currentItem.price < basket.items[lowestIndex].price) {
-        console.log('currentItem.price: ', currentItem.price)
         return currentIndex
       } else {
         return lowestIndex
@@ -15,6 +15,7 @@ function getCheapest () {
   return basket.items[index]
 }
 
+// Define a basket object with items and a getCheapest method
 const basket = {
   items: [
     { product: 'Ball Gown', price: 975.0 },
@@ -24,41 +25,51 @@ const basket = {
   getCheapest
 }
 
-describe('reading basket', () => {
+// Test the getCheapest function
+describe('getCheapest()', () => {
+  // Restore all mocks after each test
   afterEach(() => {
     jest.restoreAllMocks()
   })
 
+  // Test the getCheapest function with a spy
   it('should get the cheapest basket item with a spy', () => {
+    // Check the name of the spy
     const spy = jest.spyOn(basket, 'getCheapest')
-    expect(spy).toHaveBeenCalledTimes(0)
-
-    expect(basket.getCheapest()).toEqual(basket.items[1])
+    spy.mockImplementation(() => 'newName')
+    spy.getMockImplementation().mockName = 'newName'
+    basket.getCheapest()
+    expect(spy.getMockImplementation().mockName).toEqual('newName')
     expect(spy).toHaveBeenCalledTimes(1)
 
-    spy.mockImplementation(() => 'There are no dresses in the basket')
-    expect(basket.getCheapest()).toEqual('There are no dresses in the basket')
+    // Check the return value of the spy
+    spy.mockImplementation(() => basket.items[1])
+    expect(basket.getCheapest()).toEqual(basket.items[1])
     expect(spy).toHaveBeenCalledTimes(2)
 
-    spy.mockRestore()
+    // Mock the return value of the spy
+    spy.mockImplementationOnce(() => 'There are no dresses in the basket')
+    expect(basket.getCheapest()).toEqual('There are no dresses in the basket')
+    expect(spy).toHaveBeenCalledTimes(3)
 
-    spy.mockImplementation(getCheapest)
+    // Check that the mocked the return value once
     expect(basket.getCheapest()).toEqual(basket.items[1])
+    expect(spy).toHaveBeenCalledTimes(4)
   })
 
+  // Test the getCheapest function with a mock
   it('should get with a mock', () => {
+    // Mock the getCheapest function
     const mock = jest.fn().mockImplementation(getCheapest)
-
     expect(mock()).toEqual(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(1)
 
-    mock.mockImplementation(() => 'There are no dresses in the basket')
+    // Mock the getCheapest function with a return value
+    mock.mockImplementationOnce(() => 'There are no dresses in the basket')
     expect(mock()).toEqual('There are no dresses in the basket')
     expect(mock).toHaveBeenCalledTimes(2)
 
-    mock.mockRestore()
-
-    mock.mockImplementation(getCheapest)
+    // Check that the mocked the return value once
     expect(mock()).toEqual(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(3)
   })
