@@ -24,10 +24,6 @@ const basket = {
 }
 
 describe('reading basket', () => {
-  it('should get the cheapest item', () => {
-    expect(true).toBe(true)
-  })
-
   afterEach(() => {
     jest.restoreAllMocks() // Reset all mocks after each test
   })
