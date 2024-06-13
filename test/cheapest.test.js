@@ -2,7 +2,9 @@
 function getCheapest () {
   const index = basket.items.reduce(
     (lowestIndex, currentItem, currentIndex) => {
+      console.log('currentItem: ', currentItem.price)
       if (currentItem.price < basket.items[lowestIndex].price) {
+        console.log('currentItem.price: ', currentItem.price)
         return currentIndex
       } else {
         return lowestIndex
@@ -15,53 +17,49 @@ function getCheapest () {
 
 const basket = {
   items: [
-    { product: 'Maxi Dress', price: 170.0 },
     { product: 'Ball Gown', price: 975.0 },
+    { product: 'Maxi Dress', price: 170.0 },
     { product: 'Prom Dress', price: 450.0 }
-    // Add more items as needed
   ],
   getCheapest
 }
 
 describe('reading basket', () => {
   afterEach(() => {
-    jest.restoreAllMocks() // Reset all mocks after each test
+    jest.restoreAllMocks()
   })
 
-  it('should get the latest basket item with a spy', () => {
+  it('should get the cheapest basket item with a spy', () => {
     const spy = jest.spyOn(basket, 'getCheapest')
-    expect(spy).toHaveBeenCalledTimes(0) // Spy starts with zero calls
+    expect(spy).toHaveBeenCalledTimes(0)
 
-    // First expectation: original function behavior
-    expect(basket.getCheapest()).toEqual(basket.items[0])
+    expect(basket.getCheapest()).toEqual(basket.items[1])
     expect(spy).toHaveBeenCalledTimes(1)
 
-    // Mock implementation once and test
-    spy.mockImplementationOnce(() => 'There are no dresses in the basket')
+    spy.mockImplementation(() => 'There are no dresses in the basket')
     expect(basket.getCheapest()).toEqual('There are no dresses in the basket')
     expect(spy).toHaveBeenCalledTimes(2)
 
-    // Reset spy for subsequent tests (if needed)
     spy.mockRestore()
+
+    spy.mockImplementation(getCheapest)
+    expect(basket.getCheapest()).toEqual(basket.items[1])
   })
 
   it('should get with a mock', () => {
     const mock = jest.fn().mockImplementation(getCheapest)
 
-    // First expectation: original function behavior
-    expect(mock()).toEqual(basket.items[0])
+    expect(mock()).toEqual(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(1)
 
-    // Mock implementation once and test
-    mock.mockImplementationOnce(() => 'There are no dresses in the basket')
+    mock.mockImplementation(() => 'There are no dresses in the basket')
     expect(mock()).toEqual('There are no dresses in the basket')
     expect(mock).toHaveBeenCalledTimes(2)
 
-    // Additional expectations
-    expect(mock()).toEqual(basket.items[0])
-    expect(mock).toHaveBeenCalledTimes(3)
-
-    // Reset mock for subsequent tests (if needed)
     mock.mockRestore()
+
+    mock.mockImplementation(getCheapest)
+    expect(mock()).toEqual(basket.items[1])
+    expect(mock).toHaveBeenCalledTimes(3)
   })
 })
