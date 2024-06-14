@@ -46,7 +46,7 @@ describe('getCheapest()', () => {
 
     // Check the return value of the spy
     spy.mockImplementation(() => basket.items[1])
-    expect(basket.getCheapest()).toEqual(basket.items[1])
+    expect(basket.getCheapest()).toBe(basket.items[1])
     expect(spy).toHaveBeenCalledTimes(2)
 
     // Mock the return value of the spy
@@ -55,7 +55,7 @@ describe('getCheapest()', () => {
     expect(spy).toHaveBeenCalledTimes(3)
 
     // Check that the mocked the return value once
-    expect(basket.getCheapest()).toEqual(basket.items[1])
+    expect(basket.getCheapest()).toBe(basket.items[1])
     expect(spy).toHaveBeenCalledTimes(4)
   })
 
@@ -65,7 +65,7 @@ describe('getCheapest()', () => {
     const mock = jest.fn().mockImplementation(getCheapest)
 
     // Check the return value of the spy
-    expect(mock()).toEqual(basket.items[1])
+    expect(mock()).toBe(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(1)
 
     // Mock the getCheapest function with a return value
@@ -74,7 +74,7 @@ describe('getCheapest()', () => {
     expect(mock).toHaveBeenCalledTimes(2)
 
     // Check that the mocked the return value once
-    expect(mock()).toEqual(basket.items[1])
+    expect(mock()).toBe(basket.items[1])
     expect(mock).toHaveBeenCalledTimes(3)
   })
 })
