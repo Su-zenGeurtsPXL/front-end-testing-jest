@@ -10,7 +10,9 @@
     "lint": "eslint --ext .js,.vue src test",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint && npm run unit",
-    "unit": "jest"
+    "unit": "jest",
+    "unit:watch": "jest --watch",
+    "unit:watchAll": "jest --watchAll"
   },
   "dependencies": {
     "vue": "2.4.2",
